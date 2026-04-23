@@ -1,0 +1,24 @@
+build/
+
+# CMake/Ninja artifacts (if generated in-source)
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+*.ninja
+*.ninja_deps
+*.ninja_log
+
+# Pico outputs
+*.elf
+*.uf2
+*.bin
+*.hex
+*.map
+*.dis
+
+# Local editor state
+.vscode/*.log
+.vscode/*.code-workspace
+.vscode/c_cpp_properties.json
+.vscode/cmake-kits.json
