@@ -11,13 +11,16 @@ UART::UART(std::string_view uart_id, uint baud_rate, int tx_pin, int rx_pin)
 			sleep_ms(10);
 		}
 		return;
-	} else if (uart_id == "uart1" || uart_id == "UART1")
+	} 
+	else if (uart_id == "uart1" || uart_id == "UART1")
 	{
 		uart_inst = uart1;
-	} else if (uart_id == "uart0" || uart_id == "UART0")
+	} 
+	else if (uart_id == "uart0" || uart_id == "UART0")
 	{
 		uart_inst = uart0;
-	} else
+	} 
+	else
 	{
 		// Error handling uses 'panic' XD
 		panic("UART ID must be usb, uart0, or uart1");
@@ -35,16 +38,30 @@ UART::UART(std::string_view uart_id, uint baud_rate, int tx_pin, int rx_pin)
 	}
 }
 
-// Assumes line to be passed will not have a newline character
+// Write text plus newline
 void UART::write_line(const char *text) const
 {
 	if (is_usb)
 	{
 		printf("%s\n", text);
-	} else
+	} 
+	else
 	{
 		uart_puts(uart_inst, text);
 		uart_puts(uart_inst, "\n");
+	}
+}
+
+// Just write the text, no newline
+void UART::write(const char *text) const
+{
+	if (is_usb)
+	{
+		printf("%s", text);
+	} 
+	else
+	{
+		uart_puts(uart_inst, text);
 	}
 }
 
@@ -64,7 +81,8 @@ uint UART::read_line(char *out_buf, size_t out_buf_size)
 		if (is_usb)
 		{
 			ch = getchar();
-		} else 
+		} 
+		else 
 		{
 			while (!uart_is_readable(uart_inst))
 			{

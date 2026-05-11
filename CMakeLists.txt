@@ -16,14 +16,14 @@ else()
     set(USERHOME $ENV{HOME})
 endif()
 set(sdkVersion 2.2.0)
-set(toolchainVersion 14_2_Rel1)
+set(toolchainVersion RISCV_ZCB_RPI_2_2_0_3)
 set(picotoolVersion 2.2.0-a4)
 set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
 if (EXISTS ${picoVscode})
     include(${picoVscode})
 endif()
 # ====================================================================================
-set(PICO_BOARD pico_w CACHE STRING "Board type")
+set(PICO_BOARD pico2_w CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
@@ -40,6 +40,10 @@ add_executable(modular_pico
     lib/led.cpp
     lib/button.cpp
     lib/uart_com.cpp
+    lib/matrix_display.cpp
+    lib/game.cpp
+    lib/player.cpp
+    lib/joystick.cpp
 )
 
 pico_set_program_name(modular_pico "modular pico project")
@@ -52,17 +56,14 @@ pico_enable_stdio_usb(modular_pico 1)
 # Add the standard library to the build
 target_link_libraries(modular_pico
     pico_stdlib
-    hardware_uart)
+    hardware_uart
+    hardware_adc
+)
 
 # Add the standard include files to the build
 target_include_directories(modular_pico PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
 )
-
-# Add any user requested libraries
-target_link_libraries(modular_pico 
-        
-        )
 
 pico_add_extra_outputs(modular_pico)
 

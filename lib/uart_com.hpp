@@ -22,5 +22,6 @@ private:
 public:
     explicit UART(std::string_view uart_id, uint baud_rate = 115200, int tx_pin = -1, int rx_pin = -1);
     void write_line(const char *text) const;
+    void write(const char *text) const;
     uint read_line(char *out_buf, uint out_buf_size);
 };
