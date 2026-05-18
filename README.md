@@ -5,6 +5,10 @@ A Raspberry Pi Pico W C++ project built with the Pico SDK and CMake.
 Use with the official Raspberry Pi Pico Project Extension on VS Code
 for best results
 
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
 ## Overview
 
 This project currently demonstrates modular wrappers for:
